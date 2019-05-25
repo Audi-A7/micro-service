@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
  * @date 2019-05-24
  */
 @RequestMapping("user")
+@RestController
 public interface UserApi {
 
 
@@ -43,4 +44,14 @@ public interface UserApi {
      */
     @GetMapping(value = "{email}")
     User query(@PathVariable(name = "email") String email);
+
+
+    /**
+     * 发送邮箱验证码
+     *
+     * @param email
+     * @return
+     */
+    @GetMapping(value = "send_code/{email}")
+    boolean sendVerifyCode(@PathVariable(name = "email") String email);
 }

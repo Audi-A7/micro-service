@@ -11,6 +11,9 @@
     <modules>
         <module>common-service</module>
         <module>user-service-api</module>
+        <module>user-service</module>
+        <module>user-service</module>
+        <module>model-service</module>
     </modules>
 
     <parent>
@@ -30,6 +33,18 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>1.18.4</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.baomidou/mybatis-plus -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus</artifactId>
+                <version>3.1.1</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-all -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>4.1.14</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
