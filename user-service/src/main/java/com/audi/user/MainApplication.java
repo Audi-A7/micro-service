@@ -1,4 +1,4 @@
-package user;
+package com.audi.user;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;

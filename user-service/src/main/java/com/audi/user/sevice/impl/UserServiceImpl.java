@@ -1,4 +1,4 @@
-package user.sevice.impl;
+package com.audi.user.sevice.impl;
 
 import cn.hutool.core.date.DateUtil;
 import com.audi.user.model.User;
@@ -7,9 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import user.dao.UserMapper;
-import user.dao.po.UserPO;
-import user.sevice.UserService;
+import com.audi.user.dao.UserMapper;
+import com.audi.user.dao.po.UserPO;
+import com.audi.user.sevice.UserService;
 
 /**
  * user service 接口实现

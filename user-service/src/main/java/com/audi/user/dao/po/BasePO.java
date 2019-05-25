@@ -1,4 +1,4 @@
-package user.dao.po;
+package com.audi.user.dao.po;
 
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;

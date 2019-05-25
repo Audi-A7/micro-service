@@ -1,8 +1,10 @@
-package user.controller;
+package com.audi.user.controller;
 
 import com.audi.user.UserApi;
 import com.audi.user.model.User;
+import com.audi.user.sevice.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -15,9 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Slf4j
 public class UserController implements UserApi {
+
+    @Autowired
+    UserService userService;
+
     @Override
     public boolean register(User user) {
-        return false;
+        log.info("received register user request, email = {}", user.getEmail());
+        return userService.register(user);
     }
 
     @Override

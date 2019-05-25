@@ -1,4 +1,4 @@
-package user.dao.po;
+package com.audi.user.dao.po;
 
 import lombok.Data;
 

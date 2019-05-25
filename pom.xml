@@ -12,8 +12,6 @@
         <module>common-service</module>
         <module>user-service-api</module>
         <module>user-service</module>
-        <module>user-service</module>
-        <module>model-service</module>
     </modules>
 
     <parent>

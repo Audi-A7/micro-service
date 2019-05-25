@@ -1,4 +1,4 @@
-package user.sevice;
+package com.audi.user.sevice;
 
 
 import com.audi.user.model.User;
