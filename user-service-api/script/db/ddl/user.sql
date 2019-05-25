@@ -13,5 +13,6 @@ CREATE TABLE db_user.`user` (
   `created_at` datetime(3) NOT NULL COMMENT '创建时间，毫秒',
   `updated_by` varchar(32) DEFAULT NULL COMMENT '更新人',
   `updated_at` datetime(3) DEFAULT NULL COMMENT '更新时间，毫秒',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  unique key `uniq_email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8mb4 COMMENT='kpi数据表';

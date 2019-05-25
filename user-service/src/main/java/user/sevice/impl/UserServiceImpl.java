@@ -2,6 +2,7 @@ package user.sevice.impl;
 
 import cn.hutool.core.date.DateUtil;
 import com.audi.user.model.User;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,6 @@ import org.springframework.stereotype.Service;
 import user.dao.UserMapper;
 import user.dao.po.UserPO;
 import user.sevice.UserService;
-
-import java.text.DateFormat;
 
 /**
  * user service 接口实现
@@ -27,6 +26,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean register(User user) {
+        // 注册之前先判断用户是否存在
+        if (null != userMapper.selectOne(new LambdaQueryWrapper<UserPO>().eq(UserPO::getEmail, user.getEmail()))) {
+            log.error("user alredy exists, email = {}", user.getEmail());
+            return false;
+        }
         userMapper.insert(convertUser(user));
         return true;
     }
