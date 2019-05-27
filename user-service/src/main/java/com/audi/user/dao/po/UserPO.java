@@ -1,5 +1,6 @@
 package com.audi.user.dao.po;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
@@ -9,6 +10,7 @@ import lombok.Data;
  * @date 2019-05-24
  */
 @Data
+@TableName("user")
 public class UserPO extends BasePO {
     private String userName;
     private String pwd;
