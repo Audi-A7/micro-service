@@ -11,6 +11,8 @@ import com.audi.user.dao.UserMapper;
 import com.audi.user.dao.po.UserPO;
 import com.audi.user.sevice.UserService;
 
+import java.util.List;
+
 /**
  * user service 接口实现
  *
@@ -26,6 +28,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean register(User user) {
+        List<UserPO> userPOS = userMapper.selectList(null);
+        UserPO userPO = userMapper.selectOne(new LambdaQueryWrapper<UserPO>().eq(UserPO::getEmail, user.getEmail()));
         // 注册之前先判断用户是否存在
         if (null != userMapper.selectOne(new LambdaQueryWrapper<UserPO>().eq(UserPO::getEmail, user.getEmail()))) {
             log.error("user alredy exists, email = {}", user.getEmail());
