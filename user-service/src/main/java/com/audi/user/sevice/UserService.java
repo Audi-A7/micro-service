@@ -1,15 +1,16 @@
 package com.audi.user.sevice;
 
 
+import com.audi.consts.GenericResult;
 import com.audi.user.model.User;
 
 public interface UserService {
 
-    boolean register(User user);
+    GenericResult<Boolean> register(User user);
 
-    boolean login(String userName, String email, String pwd);
+    GenericResult<Boolean> login(String userName, String email, String pwd);
 
-    User query(String email);
+    GenericResult<User> query(String email);
 
-    boolean sendVerifyCode(String email);
+    GenericResult<Boolean> sendVerifyCode(String email);
 }

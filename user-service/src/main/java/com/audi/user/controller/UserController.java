@@ -1,5 +1,6 @@
 package com.audi.user.controller;
 
+import com.audi.consts.GenericResult;
 import com.audi.user.UserApi;
 import com.audi.user.model.User;
 import com.audi.user.sevice.UserService;
@@ -22,24 +23,24 @@ public class UserController implements UserApi {
     UserService userService;
 
     @Override
-    public boolean register(User user) {
+    public GenericResult<Boolean> register(User user) {
         log.info("received register user request, email = {}", user.getEmail());
         return userService.register(user);
     }
 
     @Override
-    public boolean login(String userName, String email, String pwd) {
-        return false;
+    public GenericResult<Boolean> login(String userName, String email, String pwd) {
+        return userService.login(userName, email, pwd);
     }
 
     @Override
-    public User query(String email) {
+    public GenericResult<User> query(String email) {
         log.info("enter query method, email = {}", email);
-        return null;
+        return userService.query(email);
     }
 
     @Override
-    public boolean sendVerifyCode(String email) {
-        return false;
+    public GenericResult<Boolean> sendVerifyCode(String email) {
+        return userService.sendVerifyCode(email);
     }
 }

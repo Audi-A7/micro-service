@@ -1,5 +1,6 @@
 package com.audi.user;
 
+import com.audi.consts.GenericResult;
 import com.audi.user.model.User;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public interface UserApi {
      * @return
      */
     @PostMapping
-    boolean register(@RequestBody User user);
+    GenericResult<Boolean> register(@RequestBody User user);
 
 
     /**
@@ -31,7 +32,7 @@ public interface UserApi {
      * @return
      */
     @GetMapping
-    boolean login(@RequestParam(name = "userName") String userName,
+    GenericResult<Boolean> login(@RequestParam(name = "userName") String userName,
                   @RequestParam(name = "email") String email,
                   @RequestParam(name = "pwd") String pwd);
 
@@ -43,7 +44,7 @@ public interface UserApi {
      * @return
      */
     @GetMapping(value = "{email}")
-    User query(@PathVariable(name = "email") String email);
+    GenericResult<User> query(@PathVariable(name = "email") String email);
 
 
     /**
@@ -53,5 +54,11 @@ public interface UserApi {
      * @return
      */
     @GetMapping(value = "send_code/{email}")
-    boolean sendVerifyCode(@PathVariable(name = "email") String email);
+    GenericResult<Boolean> sendVerifyCode(@PathVariable(name = "email") String email);
+
+
+
+
+
+
 }
