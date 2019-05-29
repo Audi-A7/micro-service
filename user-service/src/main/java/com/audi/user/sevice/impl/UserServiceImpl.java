@@ -41,12 +41,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public GenericResult<Boolean> login(String userName, String email, String pwd) {
-        return null;
+        UserPO userPO = userMapper.selectOne(new LambdaQueryWrapper<UserPO>().eq(UserPO::getEmail, email));
+        if (null == userPO || userPO.getPwd() != CryptoUtil.getMD5(pwd) || !userPO.getUserName().equals(userName)) {
+            return Results.successGeneric(true);
+        }
+        return Results.failedGeneric(UserEnum.LOGIN_FAILED.getCode(), UserEnum.LOGIN_FAILED.getMessage());
     }
 
     @Override
     public GenericResult<User> query(String email) {
-        return null;
+        UserPO userPO = userMapper.selectOne(new LambdaQueryWrapper<UserPO>().eq(UserPO::getEmail, email));
+        return Results.successGeneric(convertUserPO(userPO));
     }
 
     @Override
@@ -66,5 +71,15 @@ public class UserServiceImpl implements UserService {
         userPO.setCreatedAt(DateUtil.date());
         userPO.setUpdatedAt(DateUtil.date());
         return userPO;
+    }
+
+    private User convertUserPO(UserPO userPO) {
+        if (null == userPO) {
+            return null;
+        }
+        User user = new User();
+        BeanUtils.copyProperties(userPO, user);
+        user.setPwd(null);
+        return user;
     }
 }

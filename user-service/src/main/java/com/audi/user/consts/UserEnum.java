@@ -14,6 +14,7 @@ public enum UserEnum {
     SUCCESS("0000", "操作成功"),
     UNKNOWN_ERROR("9999", "未知的错误类型"),
     USER_EXISTS("0001", "用户已存在"),
+    LOGIN_FAILED("0002", "登录失败"),
     ;
 
     private String code;
