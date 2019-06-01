@@ -1,6 +1,7 @@
 package com.audi.user.controller;
 
 import com.audi.user.api.UserApi;
+import com.audi.user.integration.EmailClient;
 import com.audi.user.sevice.UserService;
 import com.audi.user.sevice.entity.User;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController implements UserApi {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
+
+    @Autowired
+    private EmailClient emailClient;
 
     @Override
     public boolean register(User user) {
@@ -39,7 +43,10 @@ public class UserController implements UserApi {
     }
 
     @Override
-    public boolean sendVerifyCode(String email) {
-        return userService.sendVerifyCode(email);
+    public void sendCode(String email, int len) {
+        log.info("received send code request, email = {}", email);
+        emailClient.sendEmail(email, len);
     }
+
+
 }

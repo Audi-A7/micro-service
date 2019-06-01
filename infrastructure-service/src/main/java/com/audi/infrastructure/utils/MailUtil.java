@@ -23,7 +23,7 @@ public class MailUtil {
         Properties props = new Properties();
 
         // 开启debug调试
-        props.setProperty("mail.debug", "true");
+//        props.setProperty("mail.debug", "true");
         // 发送服务器需要身份验证
         props.setProperty("mail.smtp.auth", "true");
         // 设置邮件服务器主机名

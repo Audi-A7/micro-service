@@ -47,11 +47,11 @@ public interface UserApi {
 
 
     /**
-     * 发送邮箱验证码
+     * 发送验证码
      *
-     * @param email
-     * @return
+     * @author WangQuanzhou
+     * @date 2019-06-02
      */
-    @GetMapping(value = "send_code/{email}")
-    boolean sendVerifyCode(@PathVariable(name = "email") String email);
+    @GetMapping("/send/{email}/{len}")
+    void sendCode(@PathVariable("email") String email, @PathVariable("len") int len);
 }

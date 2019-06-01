@@ -18,7 +18,7 @@ public class EmailServiceImpl implements EmailService {
 
     private RedisTemplate redisTemplate;
 
-    private static final String PREFIX = " verify_code: ";
+    private static final String PREFIX = ":verify_code:";
 
     private static final String SUBJECT = "注册验证码";
 

@@ -13,7 +13,7 @@ public class EmailController {
     private EmailService emailService;
 
     @GetMapping("send/{email}/{len}")
-    private void sendEmail(@PathVariable("email") String email, @PathVariable("len") int len) {
+    public void sendEmail(@PathVariable("email") String email, @PathVariable("len") int len) {
         emailService.sendVerifyCode(email, len);
         return;
     }
