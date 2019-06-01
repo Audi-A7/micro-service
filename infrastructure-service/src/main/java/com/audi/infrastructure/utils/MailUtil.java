@@ -1,4 +1,4 @@
-package utils;
+package com.audi.infrastructure.utils;
 
 
 import com.sun.mail.util.MailSSLSocketFactory;
@@ -51,6 +51,7 @@ public class MailUtil {
 
         transport.sendMessage(msg, msg.getAllRecipients());
         transport.close();
+
     }
 
     public static void main(String[] args) throws Exception {

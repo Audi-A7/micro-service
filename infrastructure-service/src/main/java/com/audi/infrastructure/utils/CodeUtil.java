@@ -1,4 +1,4 @@
-package utils;
+package com.audi.infrastructure.utils;
 
 import java.util.Random;
 

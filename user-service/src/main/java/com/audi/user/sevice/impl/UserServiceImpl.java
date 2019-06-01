@@ -1,13 +1,10 @@
 package com.audi.user.sevice.impl;
 
 import cn.hutool.core.date.DateUtil;
-import com.audi.consts.GenericResult;
-import com.audi.consts.Results;
-import com.audi.user.consts.UserEnum;
 import com.audi.user.dao.UserMapper;
 import com.audi.user.dao.po.UserPO;
-import com.audi.user.model.User;
 import com.audi.user.sevice.UserService;
+import com.audi.user.sevice.entity.User;
 import com.audi.user.utils.CryptoUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.extern.slf4j.Slf4j;
@@ -29,34 +26,34 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
 
     @Override
-    public GenericResult<Boolean> register(User user) {
+    public boolean register(User user) {
         // 注册之前先判断用户是否存在
         if (null != userMapper.selectOne(new LambdaQueryWrapper<UserPO>().eq(UserPO::getEmail, user.getEmail()))) {
             log.error("user alredy exists, email = {}", user.getEmail());
-            return Results.failedGeneric(UserEnum.USER_EXISTS.getCode(), UserEnum.USER_EXISTS.getMessage());
+            return false;
         }
         userMapper.insert(convertUser(user));
-        return Results.successGeneric(true);
+        return true;
     }
 
     @Override
-    public GenericResult<Boolean> login(String userName, String email, String pwd) {
+    public boolean login(String userName, String email, String pwd) {
         UserPO userPO = userMapper.selectOne(new LambdaQueryWrapper<UserPO>().eq(UserPO::getEmail, email));
         if (null == userPO || userPO.getPwd() != CryptoUtil.getMD5(pwd) || !userPO.getUserName().equals(userName)) {
-            return Results.successGeneric(true);
+            return true;
         }
-        return Results.failedGeneric(UserEnum.LOGIN_FAILED.getCode(), UserEnum.LOGIN_FAILED.getMessage());
+        return false;
     }
 
     @Override
-    public GenericResult<User> query(String email) {
+    public User query(String email) {
         UserPO userPO = userMapper.selectOne(new LambdaQueryWrapper<UserPO>().eq(UserPO::getEmail, email));
-        return Results.successGeneric(convertUserPO(userPO));
+        return convertUserPO(userPO);
     }
 
     @Override
-    public GenericResult<Boolean> sendVerifyCode(String email) {
-        return null;
+    public boolean sendVerifyCode(String email) {
+        return false;
     }
 
     private UserPO convertUser(User user) {
