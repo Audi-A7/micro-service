@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Sat Jun 01 19:23:13 CST 2019
+http\://repository.jboss.org/nexus/content/groups/public/.error=
+http\://repository.jboss.org/nexus/content/groups/public/.lastUpdated=1559388078502
+http\://maven.aliyun.com/nexus/content/groups/public/.lastUpdated=1559388193803

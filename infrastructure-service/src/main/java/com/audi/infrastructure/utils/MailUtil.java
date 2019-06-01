@@ -19,7 +19,7 @@ import java.util.Properties;
  */
 public class MailUtil {
 
-    public static void sendEmail(String from, String to, String code, String sunject, String content) throws Exception {
+    public static void sendEmail(String from, String to, String code, String subject, String content) throws Exception {
         Properties props = new Properties();
 
         // 开启debug调试
@@ -39,7 +39,7 @@ public class MailUtil {
         Session session = Session.getInstance(props);
 
         MimeMessage msg = new MimeMessage(session);
-        msg.setSubject(sunject);
+        msg.setSubject(subject);
         StringBuilder sb = new StringBuilder();
         sb.append(content).append(code);
         msg.setText(sb.toString());
