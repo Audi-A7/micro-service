@@ -1,9 +1,9 @@
-package com.audi.utils;
+package utils;
 
 import java.util.Random;
 
 /**
- * 生成随机数字
+ * 生成随机代码
  *
  * @author WangQuanzhou
  * @date 2019-06-01

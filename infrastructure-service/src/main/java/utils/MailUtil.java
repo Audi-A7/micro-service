@@ -1,4 +1,4 @@
-package com.audi.utils;
+package utils;
 
 
 import com.sun.mail.util.MailSSLSocketFactory;
@@ -10,6 +10,13 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
+
+/**
+ * 邮件服务类
+ *
+ * @author WangQuanzhou
+ * @date 2019-06-01
+ */
 public class MailUtil {
 
     public static void sendEmail(String from, String to, String code, String sunject, String content) throws Exception {
