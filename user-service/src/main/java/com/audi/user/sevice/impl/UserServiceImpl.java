@@ -10,6 +10,9 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Service;
 
 /**
@@ -23,7 +26,11 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    UserMapper userMapper;
+    private UserMapper userMapper;
+
+    private RedisTemplate redisTemplate;
+
+    private static final String PREFIX = ":verify_code:";
 
     @Override
     public boolean register(User user) {
@@ -32,6 +39,14 @@ public class UserServiceImpl implements UserService {
             log.error("user alredy exists, email = {}", user.getEmail());
             return false;
         }
+
+        // 验证验证码
+        if (!redisTemplate.hasKey(user.getEmail() + PREFIX) || !redisTemplate.opsForValue().get(user.getEmail() + PREFIX).equals(user.getVerifyCode())) {
+            log.error("false verify code for email = {}", user.getEmail());
+            return false;
+        }
+
+
         userMapper.insert(convertUser(user));
         return true;
     }
@@ -78,5 +93,15 @@ public class UserServiceImpl implements UserService {
         BeanUtils.copyProperties(userPO, user);
         user.setPwd(null);
         return user;
+    }
+
+    @Autowired(required = false)
+    public void setRedisTemplate(RedisTemplate redisTemplate) {
+        RedisSerializer stringSerializer = new StringRedisSerializer();
+        redisTemplate.setKeySerializer(stringSerializer);
+        redisTemplate.setValueSerializer(stringSerializer);
+        redisTemplate.setHashKeySerializer(stringSerializer);
+        redisTemplate.setHashValueSerializer(stringSerializer);
+        this.redisTemplate = redisTemplate;
     }
 }
