@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
  * @author WangQuanzhou
  * @date 2019-05-24
  */
-@RequestMapping("user")
 @RestController
 public interface UserApi {
 
