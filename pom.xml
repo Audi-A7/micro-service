@@ -12,6 +12,7 @@
         <module>user-service</module>
         <module>infrastructure-service</module>
         <module>eureka-service</module>
+        <module>zuul-service</module>
     </modules>
 
     <parent>
