@@ -1,0 +1,31 @@
+version: '2'
+
+services:
+  eureka-service:
+    image: eureka-service:latest
+    ports:
+      - 8761:8761
+
+  infrastructure-service:
+    image: infrastructure-service:latest
+    links:
+      - eureka-service
+    ports:
+      - 9090:9090
+
+  user-service:
+    image: user-service:latest
+    links:
+      - eureka-service
+      - infrastructure-service
+    ports:
+      - 8080:8080
+
+  zuul-service:
+    image: zuul-service:latest
+    links:
+      - eureka-service
+      - user-service
+      - infrastructure-service
+    ports:
+      - 7070:7070
