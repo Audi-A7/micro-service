@@ -10,4 +10,7 @@ public interface EmailClient {
 
     @GetMapping("send/{email}/{len}")
     void sendEmail(@PathVariable("email") String email, @PathVariable("len") int len);
+
+    @GetMapping("token/{len}")
+    String token(@PathVariable("len") int len);
 }

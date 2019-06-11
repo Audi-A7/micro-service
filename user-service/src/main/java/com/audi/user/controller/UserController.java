@@ -32,7 +32,8 @@ public class UserController implements UserApi {
     }
 
     @Override
-    public boolean login(String userName, String email, String pwd) {
+    public String login(String userName, String email, String pwd) {
+        log.info("received user login request, userName = {}, email = {}", userName, email);
         return userService.login(userName, email, pwd);
     }
 

@@ -3,6 +3,7 @@ package com.audi.user.sevice.impl;
 import cn.hutool.core.date.DateUtil;
 import com.audi.user.dao.UserMapper;
 import com.audi.user.dao.po.UserPO;
+import com.audi.user.integration.EmailClient;
 import com.audi.user.sevice.UserService;
 import com.audi.user.sevice.entity.User;
 import com.audi.user.utils.CryptoUtil;
@@ -11,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Service;
@@ -28,9 +30,15 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
-    private RedisTemplate redisTemplate;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
-    private static final String PREFIX = ":verify_code:";
+    @Autowired
+    private EmailClient emailClient;
+
+    private static final String VERIFY_PREFIX = ":verify_code:";
+
+    private static final String TOKEN_PREFIX = ":token:";
 
     @Override
     public boolean register(User user) {
@@ -41,7 +49,7 @@ public class UserServiceImpl implements UserService {
         }
 
         // 验证验证码
-        if (!redisTemplate.hasKey(user.getEmail() + PREFIX) || !redisTemplate.opsForValue().get(user.getEmail() + PREFIX).equals(user.getVerifyCode())) {
+        if (!stringRedisTemplate.hasKey(user.getEmail() + VERIFY_PREFIX) || !stringRedisTemplate.opsForValue().get(user.getEmail() + VERIFY_PREFIX).equals(user.getVerifyCode())) {
             log.error("false verify code for email = {}", user.getEmail());
             return false;
         }
@@ -52,12 +60,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean login(String userName, String email, String pwd) {
+    public String login(String userName, String email, String pwd) {
         UserPO userPO = userMapper.selectOne(new LambdaQueryWrapper<UserPO>().eq(UserPO::getEmail, email));
-        if (null == userPO || userPO.getPwd() != CryptoUtil.getMD5(pwd) || !userPO.getUserName().equals(userName)) {
-            return true;
+        if (null == userPO || !userPO.getPwd().equals(CryptoUtil.getMD5(pwd)) || !userPO.getUserName().equals(userName)) {
+            return null;
         }
-        return false;
+        String token = emailClient.token(32);
+        stringRedisTemplate.opsForValue().set(email + TOKEN_PREFIX, token);
+        System.out.println(stringRedisTemplate.opsForValue().get(email + TOKEN_PREFIX));
+        return token;
     }
 
     @Override
@@ -95,13 +106,4 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    @Autowired(required = false)
-    public void setRedisTemplate(RedisTemplate redisTemplate) {
-        RedisSerializer stringSerializer = new StringRedisSerializer();
-        redisTemplate.setKeySerializer(stringSerializer);
-        redisTemplate.setValueSerializer(stringSerializer);
-        redisTemplate.setHashKeySerializer(stringSerializer);
-        redisTemplate.setHashValueSerializer(stringSerializer);
-        this.redisTemplate = redisTemplate;
-    }
 }

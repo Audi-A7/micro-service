@@ -7,7 +7,7 @@ public interface UserService {
 
     boolean register(User user);
 
-    boolean login(String userName, String email, String pwd);
+    String login(String userName, String email, String pwd);
 
     User query(String email);
 

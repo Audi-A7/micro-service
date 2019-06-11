@@ -17,7 +17,7 @@ public interface UserApi {
      * @param user
      * @return
      */
-    @PostMapping
+    @PostMapping("register")
     boolean register(@RequestBody User user);
 
 
@@ -29,8 +29,8 @@ public interface UserApi {
      * @param pwd
      * @return
      */
-    @GetMapping
-    boolean login(@RequestParam(name = "userName") String userName,
+    @GetMapping("login")
+    String login(@RequestParam(name = "userName") String userName,
                   @RequestParam(name = "email") String email,
                   @RequestParam(name = "pwd") String pwd);
 

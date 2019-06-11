@@ -17,4 +17,14 @@ public class EmailController {
         emailService.sendVerifyCode(email, len);
         return;
     }
+
+    /**
+     * 随机获得指定长度的token
+     *
+     * @param len
+     */
+    @GetMapping("token/{len}")
+    public String token(@PathVariable("len") int len) {
+        return emailService.token(len);
+    }
 }

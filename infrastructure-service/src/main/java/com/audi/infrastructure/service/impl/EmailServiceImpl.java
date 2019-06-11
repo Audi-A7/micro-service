@@ -5,9 +5,7 @@ import com.audi.infrastructure.utils.CodeUtil;
 import com.audi.infrastructure.utils.MailUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.RedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
@@ -16,7 +14,8 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class EmailServiceImpl implements EmailService {
 
-    private RedisTemplate redisTemplate;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
 
     private static final String PREFIX = ":verify_code:";
 
@@ -35,17 +34,19 @@ public class EmailServiceImpl implements EmailService {
             log.error("send verify code error, email = {}", email, e);
             return;
         }
-        redisTemplate.opsForValue().set(email + PREFIX, code, 10, TimeUnit.MINUTES);
+        stringRedisTemplate.opsForValue().set(email + PREFIX, code, 10, TimeUnit.MINUTES);
     }
 
-
-    @Autowired(required = false)
-    public void setRedisTemplate(RedisTemplate redisTemplate) {
-        RedisSerializer stringSerializer = new StringRedisSerializer();
-        redisTemplate.setKeySerializer(stringSerializer);
-        redisTemplate.setValueSerializer(stringSerializer);
-        redisTemplate.setHashKeySerializer(stringSerializer);
-        redisTemplate.setHashValueSerializer(stringSerializer);
-        this.redisTemplate = redisTemplate;
+    /**
+     * 获取指定长度的token
+     *
+     * @param len
+     * @return
+     */
+    @Override
+    public String token(int len) {
+        String token = CodeUtil.generateCode(len);
+        log.info("len = {}, token = {}", len, token);
+        return token;
     }
 }

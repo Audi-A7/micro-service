@@ -9,4 +9,13 @@ public interface EmailService {
      * @param len
      */
     void sendVerifyCode(String email, int len);
+
+
+    /**
+     * 获取指定长度的token
+     *
+     * @param len
+     * @return
+     */
+    String token(int len);
 }
