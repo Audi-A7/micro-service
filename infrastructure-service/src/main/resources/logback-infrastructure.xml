@@ -23,7 +23,6 @@
     </appender>
     <!-- 控制台输出日志级别 -->
     <root level="info" additivity="false">
-        <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE"/>
     </root>
 </configuration>
