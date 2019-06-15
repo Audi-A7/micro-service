@@ -1,4 +1,4 @@
-#  启动命令  docker-compose up  （-d可以后台运行）
+#  启动命令  docker-compose up  （-d可以后台运行）docker-compose up  xx-service 可以指定启动某一个应用
 #  停止命令  docker-compose up
 version: '2'
 
