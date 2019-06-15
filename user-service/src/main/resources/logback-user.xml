@@ -2,7 +2,7 @@
 <configuration>
     <!-- use Spring default values -->
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>${CONSOLE_LOG_PATTERN}</pattern>
             <charset>UTF-8</charset>
@@ -25,5 +25,12 @@
     <root level="info" additivity="false">
         <appender-ref ref="FILE"/>
     </root>
+
+    <!--定义在控制台和文件打印日志，注意additivity设置为false避免重复打印日志-->
+    <Logger name="com.audi.user.dao" level="debug" additivity="false">
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="CONSOLE"/>
+    </Logger>
+
 
 </configuration>
