@@ -1,4 +1,4 @@
-FROM java:8
+FROM hub.audi.com:1010/micro-service/java:8
 
 MAINTAINER wangquanzhou audi.car@qq.com
 
