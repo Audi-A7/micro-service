@@ -19,5 +19,6 @@ hs_err_pid*
 .idea/
 target/
 log/
+log_docker/
 *.iml
 *.DS_Store

@@ -7,6 +7,8 @@ services:
     image: eureka-service:latest
     ports:
       - 8761:8761
+    volumes:
+      - /Users/wangquanzhou/IdeaProjects/micro-service/log_docker:/log
 
   infrastructure-service:
     image: infrastructure-service:latest
@@ -14,6 +16,8 @@ services:
       - eureka-service
     ports:
       - 9090:9090
+    volumes:
+      - /Users/wangquanzhou/IdeaProjects/micro-service/log_docker:/log
 
   user-service:
     image: user-service:latest
@@ -22,6 +26,8 @@ services:
       - infrastructure-service
     ports:
       - 8080:8080
+    volumes:
+      - /Users/wangquanzhou/IdeaProjects/micro-service/log_docker:/log
 
   zuul-service:
     image: zuul-service:latest
@@ -31,3 +37,5 @@ services:
       - infrastructure-service
     ports:
       - 7070:7070
+    volumes:
+      - /Users/wangquanzhou/IdeaProjects/micro-service/log_docker:/log
