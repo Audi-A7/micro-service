@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+# 便衣本地的package  并且声称tag  并且推送到harbor仓库
+
+ source ~/.bash_profile
+
 mvn clean package
 
 docker image rm -f hub.audi.com:1010/micro-service/zuul-service

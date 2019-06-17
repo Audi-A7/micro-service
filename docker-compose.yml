@@ -4,14 +4,14 @@ version: '2'
 
 services:
   eureka-service:
-    image: eureka-service:latest
+    image: hub.audi.com:1010/micro-service/eureka-service:latest
     ports:
       - 8761:8761
     volumes:
       - /Users/wangquanzhou/IdeaProjects/micro-service/log_docker:/log
 
   infrastructure-service:
-    image: infrastructure-service:latest
+    image: hub.audi.com:1010/micro-service/infrastructure-service:latest
     links:
       - eureka-service
     ports:
@@ -20,7 +20,7 @@ services:
       - /Users/wangquanzhou/IdeaProjects/micro-service/log_docker:/log
 
   user-service:
-    image: user-service:latest
+    image: hub.audi.com:1010/micro-service/user-service:latest
     links:
       - eureka-service
       - infrastructure-service
@@ -30,7 +30,7 @@ services:
       - /Users/wangquanzhou/IdeaProjects/micro-service/log_docker:/log
 
   zuul-service:
-    image: zuul-service:latest
+    image: hub.audi.com:1010/micro-service/zuul-service:latest
     links:
       - eureka-service
       - user-service
