@@ -18,7 +18,9 @@ hs_err_pid*
 # idea project file
 .idea/
 target/
+mesos/
 log/
 log_docker/
 *.iml
 *.DS_Store
+
