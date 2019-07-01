@@ -10,8 +10,7 @@
     </appender>
     <!-- RollingFileAppender：滚动记录文件，先将日志记录到指定文件，当符合某个条件时，将日志记录到其他文件 -->
     <!-- 按照日志日期及大小进行备份 -->
-    <appender name="FILE"
-              class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <encoder>
             <pattern>${FILE_LOG_PATTERN}</pattern>
         </encoder>
@@ -23,8 +22,7 @@
         </rollingPolicy>
     </appender>
     <!-- 控制台输出日志级别 -->
-    <root level="info">
-        <appender-ref ref="CONSOLE"/>
+    <root level="info" additivity="false">
         <appender-ref ref="FILE"/>
     </root>
 </configuration>
