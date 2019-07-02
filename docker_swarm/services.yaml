@@ -1,0 +1,73 @@
+version: "3.4"
+services:
+  eureka:
+    image: hub.audi.com:1010/micro-service/eureka-service:latest
+    deploy:
+      endpoint_mode: vip
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "100M"
+    ports:
+      - "8761:8761"
+
+
+  infrastructure:
+    image: hub.audi.com:1010/micro-service/infrastructure-service:latest
+    deploy:
+      endpoint_mode: vip
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: "100M"
+    depends_on:
+      - eureka
+    ports:
+      - "9090:9090"
+
+  zuul:
+    image: hub.audi.com:1010/micro-service/zuul-service:latest
+    deploy:
+      endpoint_mode: vip
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "100M"
+    depends_on:
+      - eureka
+      - infrastructure
+      - user
+    ports:
+      - "7070:7070"
+
+  user:
+    image: hub.audi.com:1010/micro-service/user-service:latest
+    deploy:
+      endpoint_mode: vip
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "200M"
+    depends_on:
+      - eureka
+      - infrastructure
+    ports:
+      - "8080:8080"
+
+
+networks:
+  default:
+    external:
+      name: audi-overlay
