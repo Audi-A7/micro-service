@@ -9,7 +9,7 @@ services:
         condition: on-failure
       resources:
         limits:
-          cpus: "0.1"
+          cpus: "0.2"
           memory: "100M"
     ports:
       - "8761:8761"
