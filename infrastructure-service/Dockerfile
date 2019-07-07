@@ -4,7 +4,7 @@ MAINTAINER wangquanzhou audi.car@qq.com
 
 ADD target/infrastructure-service-1.0-SNAPSHOT.jar /infrastructure-service.jar
 
-ENTRYPOINT ["java","-jar","/infrastructure-service.jar","--spring.profiles.active=local","--ipAddress=172.16.59.128"]
+ENTRYPOINT ["java","-jar","/infrastructure-service.jar","--spring.profiles.active=local","--ipAddress=172.16.59.128","--redisAddress=192.168.199.219","--HOST_NAME=infrastructureService"]
 
 
 

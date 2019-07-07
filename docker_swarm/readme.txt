@@ -16,4 +16,4 @@ https://blog.csdn.net/u014628771/article/details/84589151
 
 编写services.yaml文件
 启动docker swarm集群命令：
-docker stack deploy -c services.yml test
+docker stack deploy -c /home/audi/services.yml test
