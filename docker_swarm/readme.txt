@@ -14,6 +14,24 @@ service docker restart
 参考：
 https://blog.csdn.net/u014628771/article/details/84589151
 
+创建docker swarm网络：
+docker network create -d overlay audi-overlay
+查看网络
+docker network ls
+
+查看集群节点状态，谁是主节点，谁是从节点
+docker node ls
+输出示例如下：（注意星号的位置）
+7ykg71k1705o1iushk6blcvnx *   ubuntu              Ready               Active              Leader              18.09.5
+g6wyt596kzshkb01okf93h0c7     ubuntu              Ready               Active              Reachable           18.09.5
+hzmiklyuzaee7y2ltm91puobr     ubuntu              Ready               Active              Reachable           18.09.5
+
+
 编写services.yaml文件
-启动docker swarm集群命令：
+在 主节点 上，启动docker swarm集群命令：
 docker stack deploy -c /home/audi/services.yml test
+查看fuwu
+docker service ls
+
+删除部署的微服务集群
+docker stack rm test
