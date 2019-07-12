@@ -1,6 +1,6 @@
 version: "3.4"
 services:
-  eureka:
+  eureka-service:
     image: hub.audi.com:1010/micro-service/eureka-service:latest
     deploy:
       endpoint_mode: vip

@@ -1,3 +1,8 @@
 1、ubuntu01   172.16.59.128
 1、ubuntu02   172.16.59.129
 1、ubuntu03   172.16.59.130
+
+修改服务器的hostname：
+1、修改/etc/hostname文件
+2、修改/etc/hosts文件
+3、重启服务器
