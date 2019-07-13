@@ -4,7 +4,7 @@ MAINTAINER wangquanzhou audi.car@qq.com
 
 ADD target/user-service-1.0-SNAPSHOT.jar /user-service.jar
 
-ENTRYPOINT ["java","-jar","/user-service.jar","--spring.profiles.active=local","--ipAddress=172.16.59.128","--mysqlAddress=192.168.199.219","--redisAddress=192.168.199.219","--HOST_NAME=userService"]
+ENTRYPOINT ["java","-jar","/user-service.jar","--spring.profiles.active=local","--ipAddress=172.16.59.128","--mysqlAddress=172.20.150.108","--redisAddress=172.20.150.108","--HOST_NAME=userService"]
 
 
 
