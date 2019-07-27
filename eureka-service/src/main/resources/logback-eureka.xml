@@ -22,7 +22,7 @@
         </rollingPolicy>
     </appender>
     <!-- 输出日志级别  注意上面include的ase。xml中已经定义了console 此处再定义会导致控制台输出两次日志，但不影响文件日志的输出 -->
-    <root level="info">
+    <root level="info" additivity="false">
         <appender-ref ref="FILE"/>
     </root>
 </configuration>
