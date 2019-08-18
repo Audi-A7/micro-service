@@ -15,7 +15,7 @@ services:
     links:
       - eureka-service
     ports:
-      - 9090:9090
+      - 5060:5060
     volumes:
       - /Users/wangquanzhou/IdeaProjects/micro-service/log_docker:/log
 
@@ -25,7 +25,7 @@ services:
       - eureka-service
       - infrastructure-service
     ports:
-      - 8080:8080
+      - 5070:5070
     volumes:
       - /Users/wangquanzhou/IdeaProjects/micro-service/log_docker:/log
 
@@ -36,6 +36,6 @@ services:
       - user-service
       - infrastructure-service
     ports:
-      - 7070:7070
+      - 5050:5050
     volumes:
       - /Users/wangquanzhou/IdeaProjects/micro-service/log_docker:/log
