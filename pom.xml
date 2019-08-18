@@ -13,6 +13,7 @@
         <module>infrastructure-service</module>
         <module>eureka-service</module>
         <module>zuul-service</module>
+        <module>gateway-service</module>
     </modules>
 
     <parent>
