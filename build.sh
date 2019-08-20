@@ -20,3 +20,7 @@ docker push hub.audi.com:1010/micro-service/eureka-service:latest
 docker image rm -f hub.audi.com:1010/micro-service/infrastructure-service
 docker build -t hub.audi.com:1010/micro-service/infrastructure-service:latest ./infrastructure-service/
 docker push hub.audi.com:1010/micro-service/infrastructure-service:latest
+
+docker image rm -f hub.audi.com:1010/micro-service/gateway-service
+docker build -t hub.audi.com:1010/micro-service/gateway-service:latest ./gateway-service/
+docker push hub.audi.com:1010/micro-service/gateway-service:latest

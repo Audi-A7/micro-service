@@ -18,3 +18,7 @@ spring:
     host: ${ipAddress}
     database: 0
     port: 6378
+
+#  配置日志
+logging:
+  config: classpath:logback-gateway.xml
