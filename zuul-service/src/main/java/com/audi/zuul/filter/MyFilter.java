@@ -53,7 +53,7 @@ public class MyFilter extends ZuulFilter {
         String uri = request.getRequestURI();
         log.info("request uri = {}", uri);
 
-        String token = request.getParameter(TOKEN);
+        String token = request.getHeader(TOKEN);
         String email = request.getHeader(EMAIL);
 
 

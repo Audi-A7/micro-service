@@ -9,8 +9,12 @@ spring:
           filters:
             - StripPrefix=1
         - id: infrastructure-service
-            uri: lb://infrastructure
-            predicates:
-              - Path=/email/**
-            filters:
-              - StripPrefix=1
+          uri: lb://infrastructure
+          predicates:
+            - Path=/email/**
+          filters:
+            - StripPrefix=1
+  redis:
+    host: ${ipAddress}
+    database: 0
+    port: 6378
