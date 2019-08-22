@@ -10,7 +10,7 @@ services:
       resources:
         limits:
           cpus: "0.2"
-          memory: "100M"
+          memory: "300M"
     ports:
       - "8761:8761"
 
@@ -25,7 +25,7 @@ services:
       resources:
         limits:
           cpus: "0.1"
-          memory: "100M"
+          memory: "300M"
     depends_on:
       - eureka
     ports:
@@ -41,13 +41,13 @@ services:
       resources:
         limits:
           cpus: "0.2"
-          memory: "100M"
+          memory: "300M"
     depends_on:
       - eureka
       - infrastructure
       - user
     ports:
-      - "5050:5050"
+      - "5040:5040"
 
   user:
     image: hub.audi.com:1010/micro-service/user-service:latest
@@ -59,7 +59,7 @@ services:
       resources:
         limits:
           cpus: "0.2"
-          memory: "200M"
+          memory: "300M"
     depends_on:
       - eureka
       - infrastructure
