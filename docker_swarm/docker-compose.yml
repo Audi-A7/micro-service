@@ -31,8 +31,8 @@ services:
     ports:
       - "5060:5060"
 
-  zuul:
-    image: hub.audi.com:1010/micro-service/zuul-service:latest
+  gateway:
+    image: hub.audi.com:1010/micro-service/gateway-service:latest
     deploy:
       endpoint_mode: vip
       replicas: 1
