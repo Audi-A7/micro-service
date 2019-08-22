@@ -1,28 +1,73 @@
 version: "3.4"
 services:
-  alpine:
-    image: alpine
-    command:
-      - "ping"
-      - "www.baidu.com"
-    networks:
-      - "audi-overlay"
+  eureka-service:
+    image: hub.audi.com:1010/micro-service/eureka-service:latest
     deploy:
-      replicas: 2
+      endpoint_mode: vip
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "100M"
+    ports:
+      - "8761:8761"
+
+
+  infrastructure:
+    image: hub.audi.com:1010/micro-service/infrastructure-service:latest
+    deploy:
+      endpoint_mode: vip
+      replicas: 1
       restart_policy:
         condition: on-failure
       resources:
         limits:
           cpus: "0.1"
-          memory: "50M"
+          memory: "100M"
     depends_on:
-      - nginx
-  nginx:
-    image: nginx
-    networks:
-      - "audi-overlay"
+      - eureka
     ports:
-      - "8080:80"
+      - "5060:5060"
+
+  zuul:
+    image: hub.audi.com:1010/micro-service/zuul-service:latest
+    deploy:
+      endpoint_mode: vip
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "100M"
+    depends_on:
+      - eureka
+      - infrastructure
+      - user
+    ports:
+      - "5050:5050"
+
+  user:
+    image: hub.audi.com:1010/micro-service/user-service:latest
+    deploy:
+      endpoint_mode: vip
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "0.2"
+          memory: "200M"
+    depends_on:
+      - eureka
+      - infrastructure
+    ports:
+      - "5070:5070"
+
+
 networks:
-  audi-overlay:
-    external: true
+  default:
+    external:
+      name: my_net
