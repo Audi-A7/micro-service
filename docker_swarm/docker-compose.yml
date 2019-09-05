@@ -27,7 +27,7 @@ services:
           cpus: "0.1"
           memory: "300M"
     depends_on:
-      - eureka
+      - eureka-service
     ports:
       - "5060:5060"
 
@@ -43,7 +43,7 @@ services:
           cpus: "0.2"
           memory: "300M"
     depends_on:
-      - eureka
+      - eureka-service
       - infrastructure
       - user
     ports:
@@ -61,7 +61,7 @@ services:
           cpus: "0.2"
           memory: "300M"
     depends_on:
-      - eureka
+      - eureka-service
       - infrastructure
     ports:
       - "5070:5070"
