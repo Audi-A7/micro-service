@@ -13,12 +13,14 @@ services:
           memory: "300M"
     ports:
       - "8761:8761"
+    environment:
+      - "constraint node.labels.func == master"
 
 
   infrastructure:
     image: hub.audi.com:1010/micro-service/infrastructure-service:latest
     deploy:
-      endpoint_mode: vip
+      endpoint_mode: dnsrr
       replicas: 1
       restart_policy:
         condition: on-failure
@@ -48,11 +50,13 @@ services:
       - user
     ports:
       - "5040:5040"
+    environment:
+      - "constraint node.labels.func == master"
 
   user:
     image: hub.audi.com:1010/micro-service/user-service:latest
     deploy:
-      endpoint_mode: vip
+      endpoint_mode: dnsrr
       replicas: 1
       restart_policy:
         condition: on-failure
