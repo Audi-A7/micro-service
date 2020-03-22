@@ -1,18 +1,18 @@
 version: "3.4"
 services:
-  eureka-service:
-    image: registry.cn-shanghai.aliyuncs.com/audi_micro_service/micro-service/eureka-service:latest
-    deploy:
-      endpoint_mode: vip
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-      resources:
-        limits:
-          cpus: "0.2"
-          memory: "300M"
-    ports:
-      - "8761:8761"
+#  eureka-service:
+#    image: registry.cn-shanghai.aliyuncs.com/audi_micro_service/micro-service/eureka-service:latest
+#    deploy:
+#      endpoint_mode: vip
+#      replicas: 1
+#      restart_policy:
+#        condition: on-failure
+#      resources:
+#        limits:
+#          cpus: "0.2"
+#          memory: "300M"
+#    ports:
+#      - "8761:8761"
 
 
   infrastructure:
@@ -26,8 +26,8 @@ services:
         limits:
           cpus: "0.1"
           memory: "300M"
-    depends_on:
-      - eureka-service
+#    depends_on:
+#      - eureka-service
 
   gateway:
     image: registry.cn-shanghai.aliyuncs.com/audi_micro_service/micro-service/gateway-service:latest
@@ -41,9 +41,11 @@ services:
           cpus: "0.2"
           memory: "300M"
     depends_on:
-      - eureka-service
+#      - eureka-service
       - infrastructure
       - user
+    environment:
+      - "constraint node.labels.func == gateway"
     ports:
       - "5040:5040"
 
@@ -59,7 +61,7 @@ services:
           cpus: "0.2"
           memory: "300M"
     depends_on:
-      - eureka-service
+#      - eureka-service
       - infrastructure
 
 
