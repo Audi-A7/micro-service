@@ -4,7 +4,7 @@ MAINTAINER wangquanzhou audi.car@qq.com
 
 ADD target/eureka-service-1.0-SNAPSHOT.jar /eureka-service.jar
 
-ENTRYPOINT ["java","-jar","/eureka-service.jar","--spring.profiles.active=local","--ipAddress=172.20.150.108"]
+ENTRYPOINT ["java","-jar","/eureka-service.jar","--spring.profiles.active=local","--ipAddress=172.16.59.132"]
 
 
 
