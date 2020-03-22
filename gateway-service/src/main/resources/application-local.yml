@@ -15,7 +15,7 @@ spring:
           filters:
             - StripPrefix=1
   redis:
-    host: ${ipAddress}
+    host: 192.168.199.219
     database: 0
     port: 6378
 

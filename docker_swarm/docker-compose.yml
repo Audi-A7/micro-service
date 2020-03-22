@@ -30,8 +30,8 @@ services:
           memory: "300M"
     depends_on:
       - eureka-service
-    ports:
-      - "5060:5060"
+#    ports:
+#      - "5060:5060"
 
   gateway:
     image: hub.audi.com:1010/micro-service/gateway-service:latest
@@ -67,8 +67,8 @@ services:
     depends_on:
       - eureka-service
       - infrastructure
-    ports:
-      - "5070:5070"
+#    ports:
+#      - "5070:5070"
 
 
 networks:
