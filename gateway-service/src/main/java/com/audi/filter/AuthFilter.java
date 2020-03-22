@@ -39,6 +39,7 @@ public class AuthFilter implements GlobalFilter {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        log.info("enter gate way filter...");
         String email = exchange.getRequest().getHeaders().getFirst(EMAIL);
         String token = exchange.getRequest().getHeaders().getFirst(TOKEN);
         String path = exchange.getRequest().getURI().getPath();
@@ -51,8 +52,10 @@ public class AuthFilter implements GlobalFilter {
         }
         if (StringUtils.isEmpty(token)) {
             // FIXME: 2019-08-18 设置返回码
+            log.error("token is null...");
             return null;
         } else if (token.equals(stringRedisTemplate.opsForValue().get(email + PREFIX))) {
+            log.info("token is correct...");
             return chain.filter(exchange);
         }
 
